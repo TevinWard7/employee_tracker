@@ -25,7 +25,7 @@ const StartQuestions = () => {
             message: "What would you like to do?",
             choices: ["View all departments", "View all roles", "View all employees", "Add employee", "Update employee role", "Remove employee"]
         }).then(answer => {
-            switch (answer.first_name) {
+            switch (answer["first-question"]) {
                 case "View all departments":
                     viewAllDepartments();
                     break;
@@ -35,18 +35,55 @@ const StartQuestions = () => {
                 case "View all employees":
                     viewAllEmployees();
                     break;
-                case "Add employee"
-
+                case "Add employee":
+                    addEmployee();
+                    break;
+                case "Update employee role":
+                    updateEmployeeRole();
+                    break;
+                case "Remove employee":
+                    removeEmployee();
+                    break;
                 default:
                     break;
             }
         })
 };
 
+const viewAllDepartments = () => {
+    const query = "SELECT * FROM department;";
+    connection.query(query, (err, res) => {
+        if (err) throw err;
+        res.forEach(r => {
+            console.table([
+                {
+                    id: r.id,
+                    name: r.name
+                },
+            ]);
+        });
+    });
+};
+
+const viewAllRoles = () => {
+    const query = "SELECT * FROM role;";
+    connection.query(query, (err, res) => {
+        if (err) throw err;
+        res.forEach(r => {
+            console.table([
+                {
+                    id: r.id,
+                    title: r.title,
+                    salary: r.salary
+                },
+            ]);
+        });
+    });
+};
+
 const viewAllEmployees = () => {
     const query = "SELECT * FROM employee;";
     connection.query(query, (err, res) => {
-
         if (err) throw err;
         res.forEach(r => {
             console.table([
@@ -59,6 +96,5 @@ const viewAllEmployees = () => {
                 },
             ]);
         });
-
     });
 };
