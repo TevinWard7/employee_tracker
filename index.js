@@ -62,6 +62,7 @@ const viewAllDepartments = () => {
                 },
             ]);
         });
+        StartQuestions();
     });
 };
 
@@ -78,6 +79,7 @@ const viewAllRoles = () => {
                 },
             ]);
         });
+        StartQuestions();
     });
 };
 
@@ -96,5 +98,39 @@ const viewAllEmployees = () => {
                 },
             ]);
         });
+        StartQuestions();
     });
 };
+
+const addEmployee = () => {
+    inquirer.prompt([
+        {
+            name: "first_name",
+            type: "input",
+            message: "Enter first name"
+        },
+        {
+            name: "last_name",
+            type: "input",
+            message: "Enter last name"
+
+        },
+        {
+            name: "role_id",
+            type: "input",
+            message: "Enter role ID"
+        },
+        {
+            name: "manager_id",
+            type: "input",
+            message: "Enter manager ID"
+        }
+    ]).then(answer => {
+        const { first_name, last_name, role_id, manager_id } = answer;
+        const query = "INSERT INTO employee (`first_name`,`last_name`) VALUES (?, ?);"
+        connection.query(query, [first_name, last_name], (err, res) => {
+            if (err) throw err;
+            StartQuestions();
+        })
+    })
+}
