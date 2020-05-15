@@ -23,7 +23,7 @@ const StartQuestions = () => {
             name: "first-question",
             type: "list",
             message: "What would you like to do?",
-            choices: ["View all departments", "View all roles", "View all employees", "Add employee", "Update employee role", "Remove employee"]
+            choices: ["View all departments", "View all roles", "View all employees", "Add employee", "Update employee role", "Remove employee", "exit"]
         }).then(answer => {
             switch (answer["first-question"]) {
                 case "View all departments":
@@ -43,6 +43,9 @@ const StartQuestions = () => {
                     break;
                 case "Remove employee":
                     removeEmployee();
+                    break;
+                case "exit":
+                    connection.end();
                     break;
                 default:
                     break;
@@ -130,7 +133,48 @@ const addEmployee = () => {
         const query = "INSERT INTO employee (`first_name`,`last_name`) VALUES (?, ?);"
         connection.query(query, [first_name, last_name], (err, res) => {
             if (err) throw err;
+            console.log("Employee sucessfully added")
             StartQuestions();
         })
     })
 }
+
+const updateEmployeeRole = () => {
+    const query = "";
+};
+
+const removeEmployee = () => {
+    const query = "SELECT * FROM `employee`;";
+
+    connection.query(query, (err, res) => {
+
+        const employees = [];
+
+        res.forEach(r => {
+            employees.push(`${r.id} ${r.first_name} ${r.last_name}`)
+        })
+
+        if (err) throw err;
+        inquirer.prompt([
+            {
+                name: "remove",
+                type: "list",
+                message: "Who would you like to remove?",
+                choices: employees
+            },
+            {
+                name: "id",
+                type: "input",
+                message: "Enter ID number (# listed before name)"
+            }
+        ]).then(answer => {
+            const query = "DELETE FROM employee WHERE id=?;";
+            connection.query(query, [answer.id], (err, res) => {
+                if (err) throw err;
+                console.log("Employee succesfully deleted");
+                StartQuestions();
+            })
+        })
+    });
+
+};
