@@ -1,4 +1,6 @@
-# employee_tracker
+# Employee Tracker
 
-When I start the command line app
-I am presented with options
+Command line application that allows you to keep a record of your employees
+
+# Demonstration
+https://www.youtube.com/watch?v=n8Z_Mh6tdRQ&feature=youtu.be
