@@ -1,6 +1,6 @@
 # Employee Tracker
 
-Command line application that allows user to keep a record of employees
+Command line application that allows user to keep a record of employees and their given role in a company
 
 ## Table Of Contents
 - [User Story](#User-Story)
@@ -27,4 +27,5 @@ Run 'node index.js' to start application
 
 # Demonstration
 ![picture](./employee_tracker.gif)
+
 https://www.youtube.com/watch?v=n8Z_Mh6tdRQ&feature=youtu.be
