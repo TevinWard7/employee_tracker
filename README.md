@@ -9,7 +9,7 @@ Command line application that allows user to keep a record of employees
 
 ## User Story
 ```
-As buisness owner 
+As a buisness owner 
 I want to be able to maintain a list of employees
 So that I can add to, update and delete from it as well as view details about each
 ```
