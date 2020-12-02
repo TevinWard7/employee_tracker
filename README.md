@@ -1,6 +1,6 @@
 # Employee Tracker
 
-Command line application that allows you to keep a record of your employees
+Command line application that allows user to keep a record of employees
 
 ## Table Of Contents
 - [User Story](#User-Story)
